@@ -23,9 +23,6 @@ const player1Moves = document.getElementById("player-1-moves");
 const player2Moves = document.getElementById("player-2-moves");
 
 // grid
-const gridItem = document.getElementById("grid-item");
-const gameButton = document.getElementById("game-button");
-const gameIcon = document.getElementById("game-icon");
 
 // player profiles
 const player1 = {
@@ -53,39 +50,43 @@ let threeInARow = [
 ]
 
 // functions
-gridItem.addEventListener("click", displayIcon);
 
-function displayIcon() {
-    // gridItem.forEach(gridItem => {
-        gridItem.innerHTML = '<img src="./assets/naught.svg">';
-        gridItem.classlist.add('grid-active');
-    // })
-}
-// https://stackoverflow.com/questions/68580900/in-javascript-how-i-run-a-function-on-multiple-divs-with-the-same-class-to-get-d
+const displayIcon = () => {
+    const gridItemIcon = document.getElementById("grid-item-icon");
+    gridItemIcon.style.display = "block";
+};
+const gridItemContainer = document.getElementById("grid-item-container");
+gridItemContainer.addEventListener("click", displayIcon);
 
-function switchUser() {
+
+const handleIconSwitch = () => {
     let isNaught = true
     if (isNaught === false) {
-        gridItem.innerHTML = '<img src="./assets/cross.svg">';
+        
     } else {
-        gridItem.innerHTML = '<img src="./assets/naught.svg">';
+        
     }
 };
 
-function initialiseGame() {
+// https://stackoverflow.com/questions/65056793/toggle-display-image-through-an-event-listener
 
-};
+const switchIconButton = document.getElementById("switch-icon-button");
+switchIconButton.addEventListener("click", handleIconSwitch);
 
-function updateScore() {
+// function initialiseGame() {
 
-};
+// };
 
-function newGame() {
+// function updateScore() {
 
-};
+// };
 
-function resetGame() {
+// function newGame() {
 
-};
+// };
+
+// function resetGame() {
+
+// };
 
 
