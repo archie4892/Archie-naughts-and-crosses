@@ -13,7 +13,7 @@ body {
     place-items: center;
 }
 
-.grid-container {
+#grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -21,7 +21,7 @@ body {
     height: 332px;
 }
 
-.grid-item {
+.grid-element-container {
     border: 2px solid #2E2E2E;
     height: 100px;
     width: 100px;
@@ -29,7 +29,7 @@ body {
     cursor: pointer;
 }
 
-#grid-item-icon {
+.img {
     z-index: 9999;
     display: none;
 }
