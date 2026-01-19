@@ -27,53 +27,24 @@ let threeInARow = [
 ]
 
 // // function
-// let currentPlayer = true;
-
-// const gridContainer = document.querySelector(".grid-container");
-
-// // This will fire whenever any grid square is clicked
-
-// const gridElementContainer = document.querySelectorAll(".grid-element-container");
-// console.log(gridElementContainer)
-
-// gridElementContainer.forEach(() => {
-//     gridContainer.addEventListener("click", function () {
-//         const gridIcon = document.querySelector(".grid-icon")
-//         gridIcon.style.display = "block";
-//         console.log(gridElementContainer.length)
-
-//         if (currentPlayer === true) {
-//             gridIcon.src = "./assets/naught.svg";
-//         } else {
-//             gridIcon.src = "./assets/cross.svg";
-//         }
-//     }
-//     )
-// })
-
-let currentPlayer = true;
+let currentPlayer = false;
 
 const gridContainer = document.getElementById("grid-container")
 
-gridContainer.addEventListener("click", event => {
+gridContainer.addEventListener("click", handleGridClick)
+    
+function handleGridClick (event) {
     const closestContainer = event.target.closest(".grid-element-container")
-    closestContainer.innerHTML = `<img src= ${currentPlayer = currentPlayer ? "./assets/naught.svg" : "./assets/cross.svg"}>`
-})
+    currentPlayer = !currentPlayer
+    closestContainer.innerHTML = `<img src= ${currentPlayer ? "./assets/naught.svg" : "./assets/cross.svg"}>`    
+}
 
-
-const handleIconSwitch = () => {
-    let isNaught = true
-    if (isNaught === false) {
-
-    } else {
-
-    }
-};
-
-// https://stackoverflow.com/questions/65056793/toggle-display-image-through-an-event-listener
-
-const switchIconButton = document.getElementById("switch-icon-button");
-switchIconButton.addEventListener("click", handleIconSwitch);
+function nextGame () {
+    handleGridClick();
+    const gridElementContainer = document.querySelectorAll(".grid-element-container")
+    console.log(gridElementContainer, "test for next game button")
+    gridElementContainer.innerHTML = "";
+}
 
 const player2NameDisplay = document.getElementById("player-2-name-display");
 const player2Input = document.getElementById("player-2-name");

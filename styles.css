@@ -34,9 +34,8 @@ body {
     display: none;
 }
 
-#switch-icon-button {
+.game-button{
     width: 100%;
-    background-color: rgb(53, 47, 47);
     color: #ffffff;
     border: 0px;
     margin-top: 20px;
@@ -44,6 +43,19 @@ body {
     max-width: 150px;
     border-radius: 12px;
     cursor: pointer;
+}
+
+.game-button:hover {
+    opacity: 80%;
+}
+
+#reset-game-button {
+    background-color: red;
+    
+}
+
+#next-game-button {
+    background-color: rgb(53, 47, 47);
 }
 
 #selection-container, #name-container {
