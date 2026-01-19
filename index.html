@@ -1,34 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Naughts and Crosses</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-
+  <body>
     <div id="name-container">
-        <h1>Naughts and Crosses</h1>
+      <h1>Naughts and Crosses</h1>
     </div>
     <div class="column2">
-        <div class="column1">
-            <h2>Player 1</h2>
-            <form id="player-1-form">
-                <input type="text" id="player-1-name" name="name" placeholder="Please enter your name">
-                <button type="submit">Submit</button>
-            </form>
-
-        </div>
-        <div class="column1">
-            <h2>Player 2</h2>
-            <form id="player-2-form">
-                <input type="text" id="player-2-name" name="name" placeholder="Please enter your name">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+      <div class="column1">
+        <h2>Player 1</h2>
+        <form id="player-1-form">
+          <input
+            type="text"
+            id="player-1-name"
+            name="name"
+            placeholder="Please enter your name"
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="column1">
+        <h2>Player 2</h2>
+        <form id="player-2-form">
+          <input
+            type="text"
+            id="player-2-name"
+            name="name"
+            placeholder="Please enter your name"
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
 
     <!-- <div id="selection-container">
@@ -41,64 +48,59 @@
     </div> -->
 
     <div class="grid-page-container">
-
-        <div id="player-1-container">
-            <div>
-                <h1 id="player-1-name-display">Player 1</h1>
-            </div>
-            <div>
-                <h1>Score</h1>
-                <h1 id="player-1-score">8</h1>
-            </div>
-            <div>
-                <h2>Moves left</h2>
-                <h2 id="player-1-moves">5</h2>
-            </div>
-        </div>
-
+      <div id="player-1-container">
         <div>
-            <div id="grid-container">
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-                <div class="grid-element-container">
-                </div>
-            </div>
-            <div class="column2">
-                <button class="game-button" id="next-game-button" onclick="nextGame()">Next Game</button>
-                <button class="game-button" id="reset-game-button">Reset Game</button>
-            </div>
+          <h1 id="player-1-name-display">Player 1</h1>
         </div>
-
-        <div id="player-2-container">
-            <div>
-                <h1 id="player-2-name-display">Player 2</h1>
-            </div>
-            <div>
-                <h1>Score</h1>
-                <h1 id="player-2-score">6</h1>
-            </div>
-            <div>
-                <h2>Moves left</h2>
-                <h2 id="player-2-moves">4</h2>
-            </div>
+        <div>
+          <h1>Score</h1>
+          <h1 id="player-1-score">8</h1>
         </div>
+        <div>
+          <h2>Moves left</h2>
+          <h2 id="player-1-moves">5</h2>
+        </div>
+      </div>
 
+      <div>
+        <div id="winning-message"></div>
+        <div id="grid-container">
+          <div id="0" class="grid-element-container"></div>
+          <div id="1" class="grid-element-container"></div>
+          <div id="2" class="grid-element-container"></div>
+          <div id="3" class="grid-element-container"></div>
+          <div id="4" class="grid-element-container"></div>
+          <div id="5" class="grid-element-container"></div>
+          <div id="6" class="grid-element-container"></div>
+          <div id="7" class="grid-element-container"></div>
+          <div id="8" class="grid-element-container"></div>
+        </div>
+        <div class="column2">
+          <button
+            class="game-button"
+            id="next-game-button"
+            onclick="nextGame()"
+          >
+            Next Game
+          </button>
+          <button class="game-button" id="reset-game-button">Reset Game</button>
+        </div>
+      </div>
+
+      <div id="player-2-container">
+        <div>
+          <h1 id="player-2-name-display">Player 2</h1>
+        </div>
+        <div>
+          <h1>Score</h1>
+          <h1 id="player-2-score">6</h1>
+        </div>
+        <div>
+          <h2>Moves left</h2>
+          <h2 id="player-2-moves">4</h2>
+        </div>
+      </div>
     </div>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>

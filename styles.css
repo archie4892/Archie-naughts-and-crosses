@@ -63,6 +63,11 @@ body {
     text-align: center;
 }
 
+#winning-message {
+    color: #ffffff;
+    font-size: 16px;
+}
+
 /* formatting */
 .column2 {
     display: grid;
