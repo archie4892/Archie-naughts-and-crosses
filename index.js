@@ -15,26 +15,23 @@ const player2Moves = document.getElementById("player-2-moves");
 
 // detect a win
 let threeInARow = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
+  ["0", "1", "2"],
+  ["3", "4", "5"],
+  ["6", "7", "8"],
+  ["0", "3", "6"],
+  ["1", "4", "7"],
+  ["2", "5", "8"],
+  ["0", "4", "8"],
+  ["2", "4", "6"],
 ];
-threeInARow = threeInARow.map(String);
+// threeInARow = threeInARow.map(String);
 
 // // function
 let currentPlayer = false;
 let player1Clicks = [];
 let player2Clicks = [];
 
-// check if hard coded array matches user
-function doesInputMatch (threeInARow, secondaryArray) {
-    return threeInARow.some((arrValue) => secondaryArray === arrValue);
-}
+console.log(threeInARow, "three in a row array");
 
 const gridContainer = document.getElementById("grid-container");
 let winningBanner = document.getElementById("winning-message");
@@ -46,29 +43,42 @@ function handleGridClick(event) {
   currentPlayer = !currentPlayer;
   closestContainer.innerHTML = `<img src= ${currentPlayer ? "./assets/naught.svg" : "./assets/cross.svg"}>`;
 
+  row = closestContainer * 3
+  column = closestContainer % 3
+  currentBoard = ["", "", ""], ["", "", ""], ["", "", ""]
+
   if (currentPlayer) {
     player1Clicks.push(closestContainer.id);
-    // console.log(player1Clicks, "player 1 moves (naught)")
-    const player1Win = doesInputMatch(threeInARow, player1Clicks);
-    console.log(JSON.stringify(player1Clicks, "player 1 clicks"));
-    console.log(player1Win, "player 1 check");
-    winningBanner = player1Win ? (winningBanner.innerHTML = "player 1 is the winner!"): "";
+    console.log(player1Clicks, "player 1 array");
 
-  } else if (!currentPlayer) {
+    threeInARow.forEach((item) => {
+      let player1Win = false;
+      if (player1Clicks.toString() === item.toString()) {
+        player1Win = true;
+        console.log(player1Win);
+        player1Win ? (winningBanner.innerHTML = "player 1 is the winner!") : "";
+      }
+    });
 
-    player2Clicks.push(closestContainer.id);
-    // console.log(player2Clicks, "player 2 moves (cross)")
-    const player2Win = JSON.stringify(player2Clicks) === JSON.stringify(threeInARow);
-    console.log(JSON.stringify(player2Clicks, "player 2 clicks"));
-    console.log(JSON.stringify(threeInARow, "three in a row"));
-    console.log(player2Win, "player 2 check");
-    winningBanner = player2Win ? (winningBanner.innerHTML = "player 2 is the winner!") : "";
-    
   } else {
-    let mergedClicks = player1Clicks.concat(player2Clicks);
-    console.log(mergedClicks, "merged click array");
-    winningBanner = mergedClicks.length >= 9 ? (winningBanner.innerHTML = "The game is drawn!") : "";
+      player2Clicks.push(closestContainer.id);
+      console.log(player2Clicks, "player 2 array");
+      
+      threeInARow.forEach((item) => {
+        let player2Win = false;
+      if (player2Clicks.toString() === item.toString()) {
+        player2Win = true;
+        console.log(player2Win);
+        player2Win ? (winningBanner.innerHTML = "player 2 is the winner!") : "";
+      }
+    });
   }
+
+  let mergedClicks = player1Clicks.concat(player2Clicks);
+  winningBanner =
+    mergedClicks.length >= 9
+      ? (winningBanner.innerHTML = "The game is drawn!")
+      : "";
 }
 
 function nextGame() {
