@@ -27,13 +27,6 @@ let threeInARow = [
 // threeInARow = threeInARow.map(String);
 let currentBoard = ["", "", "", "", "", "", "", "", ""];
 
-function printBoard() {
-  console.log(currentBoard[0] | currentBoard[1] | currentBoard[2]);
-  console.log(currentBoard[3] | currentBoard[4] | currentBoard[5]);
-  console.log(currentBoard[6] | currentBoard[7] | currentBoard[8]);
-}
-printBoard();
-
 // // function
 let currentPlayer = "X";
 
@@ -48,32 +41,23 @@ const gridElementContainer = document.querySelectorAll(
 
 gridElementContainer.forEach((div) => {
   div.addEventListener("click", function (event) {
-    const closestContainer = event.target.closest(".grid-element-container");
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    let gridId = closestContainer.id;
-
-    console.log(currentBoard, "current board");
-    console.log(gridId);
-
-    if (currentPlayer === "X") {
-      closestContainer.innerHTML = `<img src="./assets/cross.svg">`;
-      currentBoard[gridId] = currentPlayer;
-
-      let player1Win = false;
-      player1Win = true;
-      player1Win ? (winningBanner.innerHTML = "player 1 is the winner!") : "";
-    } else {
-      closestContainer.innerHTML = `<img src="./assets/naught.svg">`;
-      currentBoard[gridId] = currentPlayer;
-
-      let player2Win = false;
-      player2Win = true;
-      player2Win ? (winningBanner.innerHTML = "player 2 is the winner!") : "";
+    const closestContainer = event.target.closest(".grid-element-container");
+    // check if the innervalue is empty, if empty append with our symbol,
+    if (closestContainer.innerHTML !== "") {
+      return;
     }
+    closestContainer.innerHTML =
+      currentPlayer === "X"
+        ? `<img src="./assets/cross.svg">`
+        : `<img src="./assets/naught.svg">`;
+    // then push to current board to match input,
+    currentBoard[closestContainer.id] = currentPlayer;
+    console.log(currentBoard, "current board");
+    // now it matches check for the winner,
+    // no winner? change the player
   });
 });
-
-// check if the innervalue is empty, if empty append with our symbol, then push to current board to match input, now it matches check for the winner, no winner? change the player
 
 function nextGame() {
   handleGridClick();
