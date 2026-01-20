@@ -15,71 +15,65 @@ const player2Moves = document.getElementById("player-2-moves");
 
 // detect a win
 let threeInARow = [
-  ["0", "1", "2"],
-  ["3", "4", "5"],
-  ["6", "7", "8"],
-  ["0", "3", "6"],
-  ["1", "4", "7"],
-  ["2", "5", "8"],
-  ["0", "4", "8"],
-  ["2", "4", "6"],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
 ];
 // threeInARow = threeInARow.map(String);
+let currentBoard = ["", "", "", "", "", "", "", "", ""];
+
+function printBoard() {
+  console.log(currentBoard[0] | currentBoard[1] | currentBoard[2]);
+  console.log(currentBoard[3] | currentBoard[4] | currentBoard[5]);
+  console.log(currentBoard[6] | currentBoard[7] | currentBoard[8]);
+}
+printBoard();
 
 // // function
-let currentPlayer = false;
-let player1Clicks = [];
-let player2Clicks = [];
-
-console.log(threeInARow, "three in a row array");
+let currentPlayer = "X";
 
 const gridContainer = document.getElementById("grid-container");
 let winningBanner = document.getElementById("winning-message");
 
-gridContainer.addEventListener("click", handleGridClick);
+// gridContainer.addEventListener("click", handleGridClick);
 
-function handleGridClick(event) {
-  const closestContainer = event.target.closest(".grid-element-container");
-  currentPlayer = !currentPlayer;
-  closestContainer.innerHTML = `<img src= ${currentPlayer ? "./assets/naught.svg" : "./assets/cross.svg"}>`;
+const gridElementContainer = document.querySelectorAll(
+  ".grid-element-container",
+);
 
-  row = closestContainer * 3
-  column = closestContainer % 3
-  currentBoard = ["", "", ""], ["", "", ""], ["", "", ""]
+gridElementContainer.forEach((div) => {
+  div.addEventListener("click", function (event) {
+    const closestContainer = event.target.closest(".grid-element-container");
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    let gridId = closestContainer.id;
 
-  if (currentPlayer) {
-    player1Clicks.push(closestContainer.id);
-    console.log(player1Clicks, "player 1 array");
+    console.log(currentBoard, "current board");
+    console.log(gridId);
 
-    threeInARow.forEach((item) => {
+    if (currentPlayer === "X") {
+      closestContainer.innerHTML = `<img src="./assets/cross.svg">`;
+      currentBoard[gridId] = currentPlayer;
+
       let player1Win = false;
-      if (player1Clicks.toString() === item.toString()) {
-        player1Win = true;
-        console.log(player1Win);
-        player1Win ? (winningBanner.innerHTML = "player 1 is the winner!") : "";
-      }
-    });
+      player1Win = true;
+      player1Win ? (winningBanner.innerHTML = "player 1 is the winner!") : "";
+    } else {
+      closestContainer.innerHTML = `<img src="./assets/naught.svg">`;
+      currentBoard[gridId] = currentPlayer;
 
-  } else {
-      player2Clicks.push(closestContainer.id);
-      console.log(player2Clicks, "player 2 array");
-      
-      threeInARow.forEach((item) => {
-        let player2Win = false;
-      if (player2Clicks.toString() === item.toString()) {
-        player2Win = true;
-        console.log(player2Win);
-        player2Win ? (winningBanner.innerHTML = "player 2 is the winner!") : "";
-      }
-    });
-  }
+      let player2Win = false;
+      player2Win = true;
+      player2Win ? (winningBanner.innerHTML = "player 2 is the winner!") : "";
+    }
+  });
+});
 
-  let mergedClicks = player1Clicks.concat(player2Clicks);
-  winningBanner =
-    mergedClicks.length >= 9
-      ? (winningBanner.innerHTML = "The game is drawn!")
-      : "";
-}
+// check if the innervalue is empty, if empty append with our symbol, then push to current board to match input, now it matches check for the winner, no winner? change the player
 
 function nextGame() {
   handleGridClick();
@@ -102,3 +96,12 @@ form1.addEventListener("input", (event) => {
   event.preventDefault();
   player1NameDisplay.textContent = player1Input;
 });
+
+//   let mergedClicks = player1Clicks.concat(player2Clicks);
+//   winningBanner =
+//     mergedClicks.length >= 9
+//       ? (winningBanner.innerHTML = "The game is drawn!")
+//       : "";
+
+// let row = Math.floor(closestContainer.id / 3)
+// let column = closestContainer.id % 3;
