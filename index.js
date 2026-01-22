@@ -5,16 +5,9 @@ const gridPageContainer = document.getElementById("grid-page-container");
 const player1Container = document.getElementById("player-1-container");
 const player2Container = document.getElementById("player-2-container");
 
-// player scores
-const player1Score = document.getElementById("player-1-score");
-const player2Score = document.getElementById("player-2-score");
-
-// player moves
-const player1Moves = document.getElementById("player-1-moves");
-const player2Moves = document.getElementById("player-2-moves");
-
 // detect a win
-let threeInARow = [
+
+let winningSequences = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -24,68 +17,65 @@ let threeInARow = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-// threeInARow = threeInARow.map(String);
-let currentBoard = ["", "", "", "", "", "", "", "", ""];
 
 // // function
 let currentPlayer = "X";
 
 const gridContainer = document.getElementById("grid-container");
 let winningBanner = document.getElementById("winning-message");
+const square = document.querySelectorAll(".square");
 
-// gridContainer.addEventListener("click", handleGridClick);
+function clearGrid(x) {
+  console.log("clear grid clicked");
+  x.innerHTML = "";
+  return
+}
 
-const gridElementContainer = document.querySelectorAll(
-  ".grid-element-container",
-);
+let playerWin = false;
+let currentBoard = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+];
 
-gridElementContainer.forEach((div) => {
+function winnerCheck(square) {
+  for (element of currentBoard) {
+    if (
+      square[element[0]].textContent === square[element[1]].textContent &&
+      square[element[1]].textContent === square[element[2]].textContent &&
+      square[element[0]].textContent !== ""
+    ) {
+      playerWin = true;
+    }
+  }
+  playerWin = false;
+}
+
+
+square.forEach((div) => {
   div.addEventListener("click", function (event) {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    const closestContainer = event.target.closest(".grid-element-container");
-    // check if the innervalue is empty, if empty append with our symbol,
-    if (closestContainer.innerHTML !== "") {
-      return;
-    }
-    closestContainer.innerHTML =
-      currentPlayer === "X"
-        ? `<img src="./assets/cross.svg">`
-        : `<img src="./assets/naught.svg">`;
-    // then push to current board to match input,
-    currentBoard[closestContainer.id] = currentPlayer;
+    const clickedSquare = event.target.closest(".square");
+    if (clickedSquare.innerHTML !== "") return;
+    clickedSquare.innerHTML =
+    currentPlayer === "X"
+    ? `<img src="./assets/cross.svg">`
+    : `<img src="./assets/naught.svg">`;
+    currentBoard[clickedSquare.id] = currentPlayer;
     console.log(currentBoard, "current board");
+    console.log(currentPlayer, "check to see whos clicked");
     // now it matches check for the winner,
     // no winner? change the player
   });
+  clearGrid(square);
 });
 
-function nextGame() {
-  handleGridClick();
-  const gridElementContainer = document.querySelectorAll(
-    ".grid-element-container",
-  );
-  console.log(gridElementContainer, "test for next game button");
-  gridElementContainer.innerHTML = "";
-}
-
-const player2NameDisplay = document.getElementById("player-2-name-display");
-const player2Input = document.getElementById("player-2-name");
-const form2 = document.getElementById("player-2-form");
-
-const form1 = document.getElementById("player-1-form");
-const player1Input = document.getElementById("player-1-name");
-const player1NameDisplay = document.getElementById("player-1-name-display");
-
-form1.addEventListener("input", (event) => {
-  event.preventDefault();
-  player1NameDisplay.textContent = player1Input;
-});
-
+console.log(playerWin, "player WIN check");
 //   let mergedClicks = player1Clicks.concat(player2Clicks);
 //   winningBanner =
 //     mergedClicks.length >= 9
 //       ? (winningBanner.innerHTML = "The game is drawn!")
 //       : "";
 
-// let row = Math.floor(closestContainer.id / 3)
-// let column = closestContainer.id % 3;
+// let row = Math.floor(clickedSquare.id / 3)
+// let column = clickedSquare.id % 3;

@@ -21,7 +21,7 @@ body {
     height: 332px;
 }
 
-.grid-element-container {
+.square{
     border: 2px solid #2E2E2E;
     height: 100px;
     width: 100px;
