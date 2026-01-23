@@ -8,9 +8,10 @@ body {
 
 .grid-page-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 80px;
     place-items: center;
+    height: 100vh;
 }
 
 #grid-container {
@@ -21,7 +22,7 @@ body {
     height: 332px;
 }
 
-.square{
+.grid-square{
     border: 2px solid #2E2E2E;
     height: 100px;
     width: 100px;
@@ -65,7 +66,8 @@ body {
 
 #winning-message {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 25px;
+    padding: 10px;
 }
 
 /* formatting */
