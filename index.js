@@ -10,6 +10,10 @@ let isWin = false;
 let isDraw = false;
 winningBanner.innerHTML = "Please press the start button to begin";
 
+function clearGrid() {
+  window.location.reload();
+}
+
 function winnerCheck(array) {
   let winningSequences = [
     [0, 1, 2],
@@ -43,7 +47,9 @@ function winnerCheck(array) {
 
 function runGame() {
   gridSquare.forEach((div) => {
+    console.log(isWin)
     div.addEventListener("click", function (event) {
+      if (isWin) return;
       currentPlayer = currentPlayer === "X" ? "O" : "X";
       const clickedGridSquare = event.target.closest(".grid-square");
       if (clickedGridSquare.innerHTML !== "") return;
@@ -55,10 +61,6 @@ function runGame() {
       winnerCheck(currentBoard);
     });
   });
-}
-
-function clearGrid() {
-  window.location.reload();
 }
 
 function main() {
