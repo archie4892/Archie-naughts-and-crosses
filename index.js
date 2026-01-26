@@ -57,6 +57,8 @@ function runGame() {
   });
 }
 
+console.log("test")
+
 function clearGrid() {
   window.location.reload();
 }
