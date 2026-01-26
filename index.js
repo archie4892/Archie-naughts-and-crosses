@@ -2,10 +2,13 @@
 const gridContainer = document.getElementById("grid-container");
 let winningBanner = document.getElementById("winning-message");
 const gridSquare = document.querySelectorAll(".grid-square");
+const startButton = document.getElementById("start-game-button");
 
 let currentPlayer = "X";
-let playerWin = false;
 let currentBoard = ["", "", "", "", "", "", "", "", ""];
+let isWin = false;
+let isDraw = false;
+winningBanner.innerHTML = "Please press the start button to begin";
 
 function winnerCheck(array) {
   let winningSequences = [
@@ -26,9 +29,11 @@ function winnerCheck(array) {
       array[element[0]] !== ""
     ) {
       winningBanner.innerHTML = `Congratulations ${currentPlayer}, You Win!`;
+      isWin = true;
       console.log(`${currentPlayer} wins`);
     } else if (!array.includes("") && array.length === 9) {
       winningBanner.innerHTML = "The game is drawn!";
+      isDraw = true;
       console.log("the game has been drawn");
     } else {
       console.log("no winner yet");
@@ -36,24 +41,27 @@ function winnerCheck(array) {
   }
 }
 
-function clearGrid(cells) {
-  currentBoard = ["", "", "", "", "", "", "", "", ""];
-  cells.forEach((cell) => {
-    cell.innerHTML = "";
+function runGame() {
+  gridSquare.forEach((div) => {
+    div.addEventListener("click", function (event) {
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      const clickedGridSquare = event.target.closest(".grid-square");
+      if (clickedGridSquare.innerHTML !== "") return;
+      clickedGridSquare.innerHTML =
+        currentPlayer === "X"
+          ? `<img src="./assets/cross.svg">`
+          : `<img src="./assets/naught.svg">`;
+      currentBoard[clickedGridSquare.id] = currentPlayer;
+      winnerCheck(currentBoard);
+    });
   });
 }
 
-gridSquare.forEach((div) => {
-  div.addEventListener("click", function (event) {
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    const clickedGridSquare = event.target.closest(".grid-square");
-    if (clickedGridSquare.innerHTML !== "") return;
-    clickedGridSquare.innerHTML =
-      currentPlayer === "X"
-        ? `<img src="./assets/cross.svg">`
-        : `<img src="./assets/naught.svg">`;
-    currentBoard[clickedGridSquare.id] = currentPlayer;
-    winnerCheck(currentBoard);
-  });
-  clearGrid(gridSquare);
-});
+function clearGrid() {
+  window.location.reload();
+}
+
+function main() {
+  winningBanner.innerHTML = "";
+  runGame();
+}
