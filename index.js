@@ -12,8 +12,14 @@ let isWin = false;
 let isDraw = false;
 winningBanner.innerHTML = "Please press the start button to begin";
 
-function clearGrid() {
+
+
+function clearGame() {
   window.location.reload();
+}
+
+function clearGrid() {
+  
 }
 
 function addScore(player) {
