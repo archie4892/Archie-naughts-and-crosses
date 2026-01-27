@@ -3,6 +3,8 @@ const gridContainer = document.getElementById("grid-container");
 let winningBanner = document.getElementById("winning-message");
 const gridSquare = document.querySelectorAll(".grid-square");
 const startButton = document.getElementById("start-game-button");
+const player1Score = document.getElementById("player-1-score");
+const player2Score = document.getElementById("player-2-score");
 
 let currentPlayer = "X";
 let currentBoard = ["", "", "", "", "", "", "", "", ""];
@@ -12,6 +14,22 @@ winningBanner.innerHTML = "Please press the start button to begin";
 
 function clearGrid() {
   window.location.reload();
+}
+
+function addScore(player) {
+  let player1Counter = 0;
+  let player2Counter = 0;
+
+  if (isWin == true && player === "O") {
+    player1Counter++;
+    console.log(player1Counter, "player 1 counter");
+  } else if (isWin == true && player === "X") {
+    player2Counter++;
+    console.log(player2Counter, "player 2 counter");
+  }
+
+  player1Score.innerHTML = player1Counter;
+  player2Score.innerHTML = player2Counter;
 }
 
 function winnerCheck(array) {
@@ -35,11 +53,12 @@ function winnerCheck(array) {
       winningBanner.innerHTML = `Congratulations ${currentPlayer}, You Win!`;
       isWin = true;
       console.log(`${currentPlayer} wins`);
-      setTimeout(clearGrid, 3000);
+      // setTimeout(clearGrid, 3000);
+      addScore(currentPlayer);
     } else if (!array.includes("") && array.length === 9) {
       winningBanner.innerHTML = "The game is drawn!";
       isDraw = true;
-      setTimeout(clearGrid, 3000);
+      // setTimeout(clearGrid, 3000);
       console.log("the game has been drawn");
     } else {
       console.log("no winner yet");
@@ -47,7 +66,7 @@ function winnerCheck(array) {
   }
 }
 
-function disableClicks (element) {
+function disableClicks(element) {
   element.style.pointerEvents = "none";
 }
 
