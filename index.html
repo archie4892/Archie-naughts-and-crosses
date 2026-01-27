@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="game-container">
         <div id="winning-message"></div>
         <div id="grid-container">
           <div id="0" class="grid-square"></div>
@@ -47,10 +47,7 @@
           <div id="7" class="grid-square"></div>
           <div id="8" class="grid-square"></div>
         </div>
-        <div class="column3">
-          <button class="game-button" id="start-game-button" onclick="main()">
-            Start Game
-          </button>
+        <div class="column2">
           <button
             class="game-button"
             id="next-game-button"
@@ -58,8 +55,17 @@
           >
             Next Game
           </button>
-          <button class="game-button" id="reset-game-button" onclick="clearGame()">Reset Game</button>
+          <button
+            class="game-button"
+            id="reset-game-button"
+            onclick="clearGame()"
+          >
+            Reset Game
+          </button>
         </div>
+        <button class="game-button" id="start-game-button" onclick="main()">
+          Start Game
+        </button>
       </div>
 
       <div id="player-2-container">

@@ -11,31 +11,33 @@ let currentBoard = ["", "", "", "", "", "", "", "", ""];
 let isWin = false;
 let isDraw = false;
 winningBanner.innerHTML = "Please press the start button to begin";
+// gridSquare.style.pointerEvents = "none"
 
+let player1Counter = 0;
+let player2Counter = 0;
 
+function player1update() {
+  player1Score.textContent = player1Counter;
+}
+
+function player2update() {
+  player2Score.textContent = player2Counter;
+}
 
 function clearGame() {
   window.location.reload();
 }
 
-function clearGrid() {
-  
-}
-
 function addScore(player) {
-  let player1Counter = 0;
-  let player2Counter = 0;
-
   if (isWin == true && player === "O") {
     player1Counter++;
+    player1update();
     console.log(player1Counter, "player 1 counter");
   } else if (isWin == true && player === "X") {
     player2Counter++;
+    player2update();
     console.log(player2Counter, "player 2 counter");
   }
-
-  player1Score.innerHTML = player1Counter;
-  player2Score.innerHTML = player2Counter;
 }
 
 function winnerCheck(array) {
@@ -59,12 +61,10 @@ function winnerCheck(array) {
       winningBanner.innerHTML = `Congratulations ${currentPlayer}, You Win!`;
       isWin = true;
       console.log(`${currentPlayer} wins`);
-      // setTimeout(clearGrid, 3000);
       addScore(currentPlayer);
     } else if (!array.includes("") && array.length === 9) {
       winningBanner.innerHTML = "The game is drawn!";
       isDraw = true;
-      // setTimeout(clearGrid, 3000);
       console.log("the game has been drawn");
     } else {
       console.log("no winner yet");
@@ -74,6 +74,10 @@ function winnerCheck(array) {
 
 function disableClicks(element) {
   element.style.pointerEvents = "none";
+}
+
+function undisableClicks(element) {
+  element.style.pointerEvents = "auto";
 }
 
 function runGame() {
@@ -94,7 +98,22 @@ function runGame() {
   });
 }
 
+function clearGrid() {
+  if(!isWin) return;
+  winningBanner.innerHTML = "";
+  isWin = false;
+  isDraw = false;
+  currentBoard = ["", "", "", "", "", "", "", "", ""];
+  currentPlayer = "X";
+
+  gridSquare.forEach((div) => {
+    div.innerHTML = "";
+    undisableClicks(div);
+  });
+}
+
 function main() {
+  startButton.remove();
   winningBanner.innerHTML = "";
   runGame();
 }
