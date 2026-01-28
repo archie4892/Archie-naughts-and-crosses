@@ -20,8 +20,8 @@ let currentPlayer = "X";
 let playerName = "";
 let player1Name = player1Input.value;
 let player2Name = player2Input.value;
-let currentBoard = ["", "", "", "", "", "", "", "", ""];
 let gameOver = false;
+let currentBoard = ["", "", "", "", "", "", "", "", ""];
 winningBanner.innerHTML = "Please press the start button to begin";
 
 let player1Counter = 0;
@@ -79,11 +79,15 @@ function winnerCheck(array) {
     ) {
       winningBanner.innerHTML = `Congratulations ${(playerName = currentPlayer === "X" ? player2Input.value : player1Input.value)}, You Win!`;
       gameOver = true;
+      player1NameDisplay.classList.remove("player-1-name-highlight");
+      player2NameDisplay.classList.remove("player-2-name-highlight");
       console.log(`${player1Name} wins`);
       addScore(currentPlayer);
     } else if (!array.includes("") && array.length === 9) {
       winningBanner.innerHTML = "The game is drawn!";
       gameOver = true;
+      player1NameDisplay.classList.remove("player-1-name-highlight");
+      player2NameDisplay.classList.remove("player-2-name-highlight");
       console.log("the game has been drawn");
     } else {
       console.log("no winner yet");
@@ -104,6 +108,8 @@ function runGame() {
     div.addEventListener("click", function (event) {
       if (gameOver) return;
       currentPlayer = currentPlayer === "X" ? "O" : "X";
+      player1NameDisplay.classList.toggle("player-1-name-highlight");
+      player2NameDisplay.classList.toggle("player-2-name-highlight");
       const clickedGridSquare = event.target.closest(".grid-square");
       if (clickedGridSquare.innerHTML !== "") return;
       clickedGridSquare.innerHTML =
@@ -123,7 +129,7 @@ function clearGrid() {
   gameOver = false;
   currentBoard = ["", "", "", "", "", "", "", "", ""];
   currentPlayer = "X";
-
+  player1NameDisplay.classList.add("player-1-name-highlight");
   gridSquare.forEach((div) => {
     div.innerHTML = "";
     undisableClicks(div);
@@ -136,7 +142,9 @@ function main() {
     player2NameDisplay.innerHTML === "Player 2"
   )
     return;
+  player1NameDisplay.classList.add("player-1-name-highlight");
   startButton.remove();
   winningBanner.innerHTML = "";
+
   runGame();
 }
