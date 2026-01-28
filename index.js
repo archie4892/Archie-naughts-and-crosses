@@ -6,12 +6,23 @@ const startButton = document.getElementById("start-game-button");
 const player1Score = document.getElementById("player-1-score");
 const player2Score = document.getElementById("player-2-score");
 
+const player1NameDisplay = document.getElementById("player-1-name-display");
+const player1Form = document.getElementById("player-1-form");
+const player1Input = document.getElementById("player-1-name");
+const player1Submit = document.getElementById("player-1-submit-button");
+
+const player2NameDisplay = document.getElementById("player-2-name-display");
+const player2Form = document.getElementById("player-2-form");
+const player2Input = document.getElementById("player-2-name");
+const player2Submit = document.getElementById("player-2-submit-button");
+
 let currentPlayer = "X";
+let playerName = "";
+let player1Name = player1Input.value;
+let player2Name = player2Input.value;
 let currentBoard = ["", "", "", "", "", "", "", "", ""];
-let isWin = false;
-let isDraw = false;
+let gameOver = false;
 winningBanner.innerHTML = "Please press the start button to begin";
-// gridSquare.style.pointerEvents = "none"
 
 let player1Counter = 0;
 let player2Counter = 0;
@@ -28,13 +39,21 @@ function clearGame() {
   window.location.reload();
 }
 
+function player1Control() {
+  player1NameDisplay.innerHTML = player1Input.value;
+}
+
+function player2Control() {
+  player2NameDisplay.innerHTML = player2Input.value;
+}
+
 function addScore(player) {
-  if (isWin == true && player === "O") {
-    player1Counter++;
+  if (gameOver == true && player === "O") {
+    player1Counter += 1;
     player1update();
     console.log(player1Counter, "player 1 counter");
-  } else if (isWin == true && player === "X") {
-    player2Counter++;
+  } else if (gameOver == true && player === "X") {
+    player2Counter += 1;
     player2update();
     console.log(player2Counter, "player 2 counter");
   }
@@ -58,13 +77,13 @@ function winnerCheck(array) {
       array[element[1]] === array[element[2]] &&
       array[element[0]] !== ""
     ) {
-      winningBanner.innerHTML = `Congratulations ${currentPlayer}, You Win!`;
-      isWin = true;
-      console.log(`${currentPlayer} wins`);
+      winningBanner.innerHTML = `Congratulations ${(playerName = currentPlayer === "X" ? player2Input.value : player1Input.value)}, You Win!`;
+      gameOver = true;
+      console.log(`${player1Name} wins`);
       addScore(currentPlayer);
     } else if (!array.includes("") && array.length === 9) {
       winningBanner.innerHTML = "The game is drawn!";
-      isDraw = true;
+      gameOver = true;
       console.log("the game has been drawn");
     } else {
       console.log("no winner yet");
@@ -83,7 +102,7 @@ function undisableClicks(element) {
 function runGame() {
   gridSquare.forEach((div) => {
     div.addEventListener("click", function (event) {
-      if (isWin) return;
+      if (gameOver) return;
       currentPlayer = currentPlayer === "X" ? "O" : "X";
       const clickedGridSquare = event.target.closest(".grid-square");
       if (clickedGridSquare.innerHTML !== "") return;
@@ -99,10 +118,9 @@ function runGame() {
 }
 
 function clearGrid() {
-  if(!isWin) return;
+  if (!gameOver) return;
   winningBanner.innerHTML = "";
-  isWin = false;
-  isDraw = false;
+  gameOver = false;
   currentBoard = ["", "", "", "", "", "", "", "", ""];
   currentPlayer = "X";
 
@@ -113,6 +131,11 @@ function clearGrid() {
 }
 
 function main() {
+  if (
+    player1NameDisplay.innerHTML === "Player 1" ||
+    player2NameDisplay.innerHTML === "Player 2"
+  )
+    return;
   startButton.remove();
   winningBanner.innerHTML = "";
   runGame();

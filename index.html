@@ -17,10 +17,6 @@
           <h1>Score</h1>
           <h1 id="player-1-score">0</h1>
         </div>
-        <!-- <div>
-          <h2>Moves left</h2>
-          <h2 id="player-1-moves">5</h2>
-        </div> -->
         <div>
           <form id="player-1-form">
             <input
@@ -28,8 +24,15 @@
               id="player-1-name"
               name="name"
               placeholder="Please enter your name"
+              required
             />
-            <button type="submit">Submit</button>
+            <button
+              type="button"
+              id="player-1-submit-button"
+              onclick="player1Control()"
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>
@@ -76,10 +79,6 @@
           <h1>Score</h1>
           <h1 id="player-2-score">0</h1>
         </div>
-        <!-- <div>
-          <h2>Moves left</h2>
-          <h2 id="player-2-moves">4</h2>
-        </div> -->
         <div>
           <form id="player-2-form">
             <input
@@ -87,8 +86,15 @@
               id="player-2-name"
               name="name"
               placeholder="Please enter your name"
+              required
             />
-            <button type="submit">Submit</button>
+            <button
+              type="button"
+              id="player-2-submit-button"
+              onclick="player2Control()"
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>
