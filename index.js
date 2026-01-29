@@ -17,6 +17,8 @@ const player2Submit = document.getElementById("player-2-submit-button");
 
 let currentPlayer = "X";
 let playerName = "";
+let player1Name = player1Input.value;
+let player2Name = player2Input.value;
 let gameOver = false;
 let currentBoard = ["", "", "", "", "", "", "", "", ""];
 winningBanner.innerHTML = "Please press the start button to begin";
@@ -142,5 +144,6 @@ function main() {
   player1NameDisplay.classList.add("player-1-name-highlight");
   startButton.remove();
   winningBanner.innerHTML = "";
+
   runGame();
 }
